@@ -1,0 +1,151 @@
+[
+{
+  "model": "webapp.category",
+  "pk": 1,
+  "fields": {
+    "categoryname": "Услуга"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 2,
+  "fields": {
+    "categoryname": "Разное"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 3,
+  "fields": {
+    "categoryname": "Игрушки"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 4,
+  "fields": {
+    "categoryname": "Машины"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 5,
+  "fields": {
+    "categoryname": "Ножи"
+  }
+},
+{
+  "model": "webapp.ads",
+  "pk": 10,
+  "fields": {
+    "picture": "picture/wallpaperflare.com_wallpaper_NHf2ie8.jpg",
+    "title": "Картина1",
+    "description": "2 на 2 метра",
+    "ads_author": 4,
+    "category": 2,
+    "price": 1500,
+    "status": "published",
+    "created_at": "2023-02-11T12:36:43.302Z",
+    "updated_at": "2023-02-11T12:42:02.718Z"
+  }
+},
+{
+  "model": "webapp.ads",
+  "pk": 11,
+  "fields": {
+    "picture": "picture/756129720103196.jpg",
+    "title": "Car",
+    "description": "2006",
+    "ads_author": 1,
+    "category": 4,
+    "price": 3000,
+    "status": "published",
+    "created_at": "2023-02-11T12:37:54.556Z",
+    "updated_at": "2023-02-11T12:39:06.680Z"
+  }
+},
+{
+  "model": "webapp.ads",
+  "pk": 12,
+  "fields": {
+    "picture": "",
+    "title": "test1",
+    "description": "123123",
+    "ads_author": 3,
+    "category": 5,
+    "price": 123,
+    "status": "rejected",
+    "created_at": "2023-02-11T12:38:14.131Z",
+    "updated_at": "2023-02-11T12:39:07.749Z"
+  }
+},
+{
+  "model": "webapp.ads",
+  "pk": 13,
+  "fields": {
+    "picture": "",
+    "title": "test2",
+    "description": "1321312",
+    "ads_author": 4,
+    "category": 2,
+    "price": 123,
+    "status": "for_delete",
+    "created_at": "2023-02-11T12:38:34.418Z",
+    "updated_at": "2023-02-11T12:41:51.103Z"
+  }
+},
+{
+  "model": "webapp.comment",
+  "pk": 24,
+  "fields": {
+    "ad": 10,
+    "text": "Нормально",
+    "comment_author": 5,
+    "created_at": "2023-02-11T12:40:01.791Z"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "avatar": "user_pics/wallpaperflare.com_wallpaper.jpg",
+    "git_profile": null,
+    "about_user": "",
+    "phone": "2132132131"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": 3,
+    "avatar": "",
+    "git_profile": null,
+    "about_user": null,
+    "phone": null
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 3,
+  "fields": {
+    "user": 4,
+    "avatar": "",
+    "git_profile": null,
+    "about_user": null,
+    "phone": null
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 4,
+  "fields": {
+    "user": 5,
+    "avatar": "",
+    "git_profile": null,
+    "about_user": null,
+    "phone": null
+  }
+}
+]
