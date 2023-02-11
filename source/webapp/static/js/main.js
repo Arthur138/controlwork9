@@ -15,10 +15,8 @@
         let url =target.dataset.link;
         let id = target.dataset.pk;
         let response = await makeRequest(url);
-        // let div = document.getElementsByClassName('card');
         let ads = document.getElementById(`div_${id}`)
         ads.removeChild(ads.firstElementChild)
-
     }
 
 
