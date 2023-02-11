@@ -36,7 +36,7 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ads = self.object.author.exclude(status='for_delete', )
+        ads = self.object.author.exclude(status='for_delete')
         if self.request.user != self.object:
             ads = ads.filter(status='published')
         context['ads'] = ads.order_by('-created_at')
