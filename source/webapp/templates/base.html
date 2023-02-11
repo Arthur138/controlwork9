@@ -39,6 +39,11 @@
                 </li>
               <li class="menu-right"><a href="{% url 'accounts:create' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}" class="nav-link">Регистрация</a></li>
           {% endif %}
+              {% if perms.webapp.view_not_moderated_ads %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'webapp:ad_moder_list' %}">Moderator List</a>
+                </li>
+              {% endif %}
           </ul>
  </nav>
     <div class="container">

@@ -17,7 +17,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ ad.title }}</h5>
               <p>{{ ad.price }}</p>
-              <p>{{ad.status}}</p>
+              <p>{{ad.get_status_display }}</p>
             <a href="{% url 'webapp:ad_detail' ad.pk %}" class="btn btn-primary">More...</a>
            {% if ad.ads_author == request.user %}
            <a href="{% url 'webapp:ad_update' ad.pk %}" class="btn btn-primary">Update</a>
@@ -28,8 +28,7 @@
         </br>
     {% endfor %}
 
-    {% if is_paginated %}
+{% if is_paginated %}
         {% include "partial/pagination.html" %}
     {% endif %}
-
 {% endblock %}

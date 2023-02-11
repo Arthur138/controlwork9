@@ -21,6 +21,9 @@ class Ads(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
 
+
+    class Meta:
+        permissions = [("view_not_moderated_ads", "Просмотр непромодерированных объявлений")]
     def __str__(self):
         return f'{self.title}'
 

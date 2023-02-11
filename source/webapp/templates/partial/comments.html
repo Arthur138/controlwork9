@@ -5,7 +5,7 @@
             <h5 class="card-title"><a href="{% url 'accounts:user_detail' comment.comment_author.pk %}">{{ comment.comment_author }}</a> {{ comment.comment_author.email }}</h5>
             <p>{{ comment.text }}</p>
               <h6>{{ comment.created_at }}</h6>
-            <a href="#" class="btn btn-primary">Update</a>
+
             <a href="{% url 'webapp:comments_delete' comment.pk %}" class="btn btn-primary">Delete</a>
           </div>
         </div>

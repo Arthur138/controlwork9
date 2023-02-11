@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+
+{% endblock %}
+
+
+{% block content %}
+{% for ad in ads %}
+<div id="div_{{ ad.pk }}" >
+<div class="card" style="width: 18rem;" >
+    {% if ad.picture %}
+    <img src="{{ ad.picture.url }}" class="card-img-top" alt="...">
+    {% else %}
+    <img src="{% static '/images/empty.jpg' %}" class="card-img-top">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ ad.title }}</h5>
+        <p>{{ ad.price }}</p>
+        <p>{{ad.get_status_display }}</p>
+        <button href="#" data-pk="{{ ad.pk }}" onclick="buttonClick(event)"
+                data-link="{% url 'webapp:moder_choose_yes' ad.pk %}" class="btn btn-success">Одобрить</button>
+        <a href="#" data-pk="{{ ad.pk }}" onclick="buttonClick(event)" data-link="{% url 'webapp:moder_choose_no' ad.pk %}"
+           class="btn btn-danger">Отклонить</a>
+
+    </div>
+</div>
+    </div>
+</br>
+{% endfor %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView
 from webapp.forms import CommentsForm
 from webapp.models import Comment , Ads
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -15,9 +15,6 @@ class CommentDelete(DeleteView):
 
     def get_success_url(self):
         return reverse('webapp:ad_detail', kwargs={'pk': self.object.ad.pk})
-
-
-
 
 class CommentsCreate(CreateView):
     model = Comment

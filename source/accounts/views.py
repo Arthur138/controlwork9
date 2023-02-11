@@ -43,8 +43,6 @@ class UserDetailView(DetailView):
         return context
 
 
-
-
 class UserChangeView(PermissionRequiredMixin , UpdateView):
     model = get_user_model()
     form_class = UserChangeForm

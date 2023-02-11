@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Ads
 from webapp.forms import AdsForm , CommentsForm
@@ -13,6 +14,7 @@ class AdsList(ListView):
     template_name = 'ads/index.html'
     context_object_name = 'ads'
     model = Ads
+    paginate_by = 3
 
     def get_queryset(self):
         return super().get_queryset().filter(status='published').order_by('-created_at')
@@ -83,3 +85,28 @@ class AdsDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('webapp:index')
+
+class ListMooderateComments(PermissionRequiredMixin, ListView):
+    model = Ads
+    template_name = 'ads/moderate_list.html'
+    context_object_name = 'ads'
+    permission_required = 'webapp.view_not_moderated_ads'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(status='for_moderation')
+
+class ModerYesView(View):
+    def get(self, request, *args, **kwargs):
+        ads = get_object_or_404(Ads, pk=self.kwargs.get('pk'))
+        ads.status = 'published'
+        ads.save()
+        response = JsonResponse({})
+        return response
+
+class ModerNoView(View):
+    def get(self, request, *args, **kwargs):
+        ads = get_object_or_404(Ads, pk=self.kwargs.get('pk'))
+        ads.status = 'rejected'
+        ads.save()
+        response = JsonResponse({})
+        return response
