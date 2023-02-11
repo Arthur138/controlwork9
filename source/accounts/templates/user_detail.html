@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Пользователь{% endblock %}
 {% block nav %}
@@ -24,8 +25,32 @@
         <p class="card-text"><b>Почта:</b> {{ user_obj.email }}</p>
         <p class="card-text"><b>Гит:</b> {{ user_obj.profile.git_profile }}</p>
         <p class="card-text"><b>О себе:</b> {{ user_obj.profile.about_user }}</p>
+        <p class="card-text"><b>Телефон:</b> {{ user_obj.profile.phone }}</p>
       </div>
     </div>
   </div>
 </div>
+
+{% for ad in ads %}
+        <div class="card" style="width: 18rem;">
+        {%  if ad.picture %}
+            <img src="{{ ad.picture.url }}" class="card-img-top" alt="...">
+        {% else %}
+            <img src="{% static "images/empty.jpg" %}" class="card-img-top">
+        {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ ad.title }}</h5>
+              <p>{{ ad.price }}</p>
+              <p>{{ad.get_status_display }}</p>
+            <a href="{% url 'webapp:ad_detail' ad.pk %}" class="btn btn-primary">More...</a>
+           {% if ad.ads_author == request.user %}
+              {% if ad.status != 'rejected' %}
+           <a href="{% url 'webapp:ad_update' ad.pk %}" class="btn btn-primary">Update</a>
+              {% endif %}
+          <a href="{% url 'webapp:ad_delete' ad.pk %}" class="btn btn-primary">Delete</a>
+              {% endif %}
+          </div>
+        </div>
+        </br>
+    {% endfor %}
 {% endblock %}

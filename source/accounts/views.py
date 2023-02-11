@@ -34,30 +34,26 @@ class UserDetailView(DetailView):
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     reviews = self.object.author.all()
-    #     if not self.request.user.has_perm('webapp:view_not_moderated_reviews') and self.object != self.request.user:
-    #         reviews = reviews.filter(moderated=True)
-    #     context['reviews'] = reviews
-    #     return context
-
-class UsersList(PermissionRequiredMixin, ListView):
-    model = get_user_model()
-    template_name = 'users_list.html'
-    context_object_name = 'user_obj'
-    permission_required = 'accounts.can_see_users'
-
-    def has_permission(self):
-        return super().has_permission()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ads = self.object.author.exclude(status='for_delete', )
+        if self.request.user != self.object:
+            ads = ads.filter(status='published')
+        context['ads'] = ads.order_by('-created_at')
+        return context
 
 
-class UserChangeView(LoginRequiredMixin , UpdateView):
+
+
+class UserChangeView(PermissionRequiredMixin , UpdateView):
     model = get_user_model()
     form_class = UserChangeForm
     template_name = 'user_change.html'
     context_object_name = 'user_obj'
     form_profile_class = ProfileChangeForm
+
+    def has_permission(self):
+        return self.get_object() == self.request.user
 
     def get_object(self, queryset=None):
         return self.request.user

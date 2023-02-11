@@ -34,5 +34,5 @@ class UserChangeForm(forms.ModelForm):
 class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['avatar','git_profile','about_user']
+        fields = ['avatar','git_profile','about_user', 'phone']
 

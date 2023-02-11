@@ -6,6 +6,7 @@ class Profile(models.Model):
     avatar = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Аватар')
     git_profile = models.URLField(max_length=200,null=True, blank=True, verbose_name='Ссылка на github')
     about_user = models.TextField(max_length=2000,null=True, blank=True, verbose_name='О себе')
+    phone = models.CharField(max_length=13, null=True, blank=True, verbose_name='Телефон')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"

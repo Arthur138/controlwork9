@@ -3,16 +3,8 @@
 
 {% block nav %}
 
-<!--    {% if perms.webapp.delete_product %}-->
-<!--    <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Delete product</a>-->
-<!--    </li>-->
-<!--    {% endif %}-->
-<!--    {% if request.user.is_authenteficated %}-->
-<!--    <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Add review+</a>-->
-<!--    </li>-->
-<!--    {% endif %}-->
+
+
 
 {% endblock %}
 
@@ -28,13 +20,28 @@
             <p>Описание: {{ ad.description }}</p>
             <p>Категория: {{ ad.category }}</p>
             <p>Цена: {{ ad.price }}</p>
-            <p>Статус: {{ ad.status }}</p>
-            <p>Автор: {{ ad.ads_author }}</p>
+            <p>Статус: {{ ad.get_status_display }}</p>
+            <p>Автор:<a href="{% url 'accounts:user_detail' ad.ads_author.pk %}">{{ ad.ads_author }}</a></p>
+            {% if ad.ads_author == request.user %}
+              {% if ad.status != 'rejected' %}
             <a href="{% url 'webapp:ad_update' ad.pk %}" class="btn btn-primary">Update</a>
+              {% endif %}
             <a href="{% url 'webapp:ad_delete' ad.pk %}" class="btn btn-primary">Delete</a>
+
+            {% endif %}
+
           </div>
         </div>
 
+    <hr>
+{% if request.user.is_authenticated %}
+    {% if ad.ads_author != request.user %}
+      <form action="{% url 'webapp:comments_create' ad.pk %}" method="POST">
+        {% include 'partial/form.html' with button_text='Оставить отзыв' %}
+    </form>
+    {% endif %}
+{% endif %}
 
+   {%  include 'partial/comments.html' %}
 
 {% endblock %}

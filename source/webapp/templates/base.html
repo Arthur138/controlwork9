@@ -20,26 +20,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             {% block nav %}
-<!---->
-            {%  endblock %}
-<!--        {% if perms.webapp.add_product %}-->
+            {% endblock %}
+           {% if request.user.is_authenticated %}
           <li class="nav-item">
                 <a class="nav-link" href="{% url 'webapp:ad_create' %}">Create Add+</a>
                 </li>
-<!--          {% endif %}-->
-<!--          {% if request.user.is_authenticated %}-->
-<!--                 <li class="nav-item">-->
-<!--                <a class="nav-link" href="{%   url 'accounts:user_detail' request.user.pk %}">Hi, {{ request.user.username }}</a>-->
-<!--                </li>-->
-<!--              <li class="nav-item">-->
-<!--                <a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a>-->
-<!--                </li>-->
-<!--              {% else %}-->
-<!--              <li class="nav-item">-->
-<!--                <a class="nav-link" href="{% url 'accounts:login' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}">Login</a>-->
-<!--                </li>-->
-<!--              <li class="menu-right"><a href="{% url 'accounts:create' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}" class="nav-link">Регистрация</a></li>-->
-<!--          {% endif %}-->
+              {% endif %}
+          {% if request.user.is_authenticated %}
+                 <li class="nav-item">
+                <a class="nav-link" href="{%   url 'accounts:user_detail' request.user.pk %}">Hi, {{ request.user.username }}</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a>
+                </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}">Login</a>
+                </li>
+              <li class="menu-right"><a href="{% url 'accounts:create' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}" class="nav-link">Регистрация</a></li>
+          {% endif %}
           </ul>
  </nav>
     <div class="container">
