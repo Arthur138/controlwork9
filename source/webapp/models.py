@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-STATUS_CHOICES = [('for_moderation', 'На модерацию'), ('published', 'опубликовано'), ('rejected', 'Отклонено'), ('for_delete', 'На удаление')]
+STATUS_CHOICES = [('for_moderation', 'На модерацию'), ('published', 'Опубликовано'), ('rejected', 'Отклонено'), ('for_delete', 'На удаление')]
 # Create your models here.
 
 
@@ -20,6 +20,9 @@ class Ads(models.Model):
                                 verbose_name='Статус')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
+
+    def __str__(self):
+        return f'{self.title}'
 
 class Comment(models.Model):
     ad = models.ForeignKey('webapp.Ads', related_name='comment', on_delete=models.CASCADE,

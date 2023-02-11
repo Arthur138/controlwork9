@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+
+<!--    {% if perms.webapp.delete_product %}-->
+<!--    <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Delete product</a>-->
+<!--    </li>-->
+<!--    {% endif %}-->
+<!--    {% if request.user.is_authenteficated %}-->
+<!--    <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Add review+</a>-->
+<!--    </li>-->
+<!--    {% endif %}-->
+
+{% endblock %}
+
+{% block content %}
+    <div class="card" style="width: 18rem;">
+        {%  if ad.picture %}
+            <img src="{{ ad.picture.url }}" class="card-img-top" alt="...">
+        {% else %}
+            <img src="{% static "images/empty.jpg" %}" class="card-img-top">
+        {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ ad.title }}</h5>
+            <p>Описание: {{ ad.description }}</p>
+            <p>Категория: {{ ad.category }}</p>
+            <p>Цена: {{ ad.price }}</p>
+            <p>Статус: {{ ad.status }}</p>
+            <p>Автор: {{ ad.ads_author }}</p>
+            <a href="{% url 'webapp:ad_update' ad.pk %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'webapp:ad_delete' ad.pk %}" class="btn btn-primary">Delete</a>
+          </div>
+        </div>
+
+
+
+{% endblock %}
